@@ -1,0 +1,85 @@
+.form-group {
+	margin-bottom: 15px;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+.form-group input {
+	width: 100%;
+	padding: 8px;
+	font-size: 14px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.form-group textarea {
+	width: 100%;
+	padding: 8px;
+	font-size: 14px;
+	height: 100px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: none;
+}
+
+.error {
+	color: red;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+.require {
+	color: red;
+	font-size: 16px;
+	padding-left: 5px;
+}
+
+.add-button {
+	background-color: transparent;
+	color: gray;
+	padding: 10px;
+	width: 200px;
+	margin-left: 20px;
+	border: 1px solid lightgray;
+	border-radius: 10px;
+}
+  
+.sub-content {
+	padding: 30px;
+}
+
+.sub-content-action {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.sub-content-action button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Styles for active buttons */
+.sub-content-action button.save-button {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.sub-content-action button.cancel-button {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+/* Styles for disabled buttons */
+.sub-content-action button:disabled {
+  background-color: #cccccc; /* Light grey */
+  color: #666666; /* Dark grey */
+  cursor: not-allowed;
+}

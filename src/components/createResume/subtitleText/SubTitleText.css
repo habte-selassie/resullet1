@@ -1,0 +1,7 @@
+.subtitle-text {
+    width: 100%;
+    font-size: large;
+    border-bottom: 1px solid gray;
+    padding: 10px;
+    margin: 10px 0;
+}

@@ -1,13 +1,17 @@
-// import React from "react";
-// import "./App.css";
-// import Register from "./Register/Register";
+import React, { Component } from 'react';
+import './App.css';
+import { ResumePage } from './screens';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
-// const App = () => {
-// 	return (
-// 		<div>
-// 			<Register />
-// 		</div>
-// 	);
-// };
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <ResumePage />
+      </Provider>        
+    );
+  }
+};
 
-// export default App;
+export default App;
