@@ -15,3 +15,22 @@ class App extends Component {
 };
 
 export default App;
+
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { AppKitProvider } from './AppKitProvider'  // Ensure this points to the correct file where AppKitProvider is defined
+import ConnectButton from './ConnectButton'  // Ensure this points to the correct file where ConnectButton is defined
+
+function App() {
+  return (
+    <AppKitProvider>
+      <div>
+        <h1>Test WalletConnect Button</h1>
+        <ConnectButton />  {/* This renders the WalletConnect button */}
+      </div>
+    </AppKitProvider>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
