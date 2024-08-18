@@ -1,0 +1,38 @@
+.register-screen {
+	flex: 1;
+	margin-top: 50px;
+	text-align: center;
+	flex-direction: column;
+
+	.field-container {
+		margin: 20px;
+	}
+
+	.text-input {
+		padding-left: 15px;
+		width: 300px;
+		height: 44px;
+		border-radius: 5px;
+		border-width: 1px;
+		box-shadow: 10px 10px 3px;
+		font-size: 18px;
+	}
+
+	.button {
+		background-color: #5859fb;
+		border: 1px solid black;
+		width: 320px;
+		height: 50px;
+		padding: 10px 20px;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 18px;
+		box-shadow: 10px 10px 3px;
+	}
+
+	.button-text {
+		font-weight: 600;
+		letter-spacing: 0.2cap;
+		color: white;
+	}
+}
