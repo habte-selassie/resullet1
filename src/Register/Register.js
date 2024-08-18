@@ -1,33 +1,41 @@
 import React, { useState } from "react";
-import { userDataInitState } from "../../state/initialStates";
+import { connectWithWallet } from "../utils/web3connection";
 import "./Register.css";
 
 const Register = () => {
-	const [walletConnected, setWalletConnected] = useState(false);
-	const [data, setData] = useState(userDataInitState);
+	const userDataInitState = {
+		name: "",
+		email: "",
+		password: "",
+	};
+	const [userData, setUserData] = useState(userDataInitState);
+	//..web3..............v
+	const [walletConnected, setWalletConnected] = useState({
+		address: "",
+	});
 
-	const lala = () => {};
-
-	const connectWithWallet = async () => {
-		const result = await lala();
-		if (result.success) {
-			setWalletConnected(true);
-		}
+	const accountChangeHandler = (account) => {
+		console.log(account);
+		setWalletConnected({
+			address: account,
+		});
 	};
 
+	//..web3..............^
 	const sendInfo = async (event) => {
 		event.preventDefault();
-		await localStorage.setItem("userData", JSON.stringify(data));
-		setData(userDataInitState);
+		await localStorage.setItem("userData", JSON.stringify(userData));
+		setUserData(userDataInitState);
 	};
 
 	const onChangeText = ({ target }) => {
-		setData({ ...data, [target.name]: target.value });
+		setUserData({ ...userData, [target.name]: target.value });
 	};
 
 	return (
 		<div className="register-screen">
 			<form onSubmit={sendInfo}>
+				<div className="field-container">{walletConnected.address}</div>
 				<div className="field-container">
 					<input
 						type="text"
@@ -35,7 +43,7 @@ const Register = () => {
 						name="name"
 						minLength={4}
 						placeholder="Name"
-						value={data.name}
+						value={userData.name}
 						onChange={onChangeText}
 					/>
 				</div>
@@ -46,7 +54,7 @@ const Register = () => {
 						className="text-input"
 						minLength={10}
 						placeholder="Email *"
-						value={data.email}
+						value={userData.email}
 						onChange={onChangeText}
 					/>
 				</div>
@@ -57,20 +65,27 @@ const Register = () => {
 						className="text-input"
 						minLength={8}
 						placeholder="password *"
-						value={data.password}
+						value={userData.password}
 						onChange={onChangeText}
 					/>
 				</div>
 				<div className="field-container">
-					<button type="submit" className="button" onClick={connectWithWallet}>
-						<span className="button-text">Connect wallet</span>
+					<button
+						type="submit"
+						className="button"
+						onClick={() => connectWithWallet(accountChangeHandler)}
+						disabled={walletConnected.address}
+					>
+						<span className="button-text">
+							{walletConnected.address ? `Connected` : "Connect wallet"}
+						</span>
 					</button>
 				</div>
 				<div className="field-container">
 					<button
 						type="submit"
 						className="button"
-						disabled={!data.password || !data.email || !walletConnected}
+						disabled={!userData.password || !userData.email || !walletConnected}
 						onClick={sendInfo}
 					>
 						<span className="button-text">Register</span>
