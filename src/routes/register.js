@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connectWithWallet } from "../utils/web3connection";
-import "./Register.css";
+import "../styles/Register.css";
 
 const Register = () => {
 	const userDataInitState = {
