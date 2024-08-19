@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@metamask/sdk-react": "^0.27.0",
+    "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.2.7",
     "@supabase/auth-ui-shared": "^0.1.8",
     "ethers": "^6.13.2",
