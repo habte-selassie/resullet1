@@ -3,7 +3,7 @@ import { createWeb3Modal } from '@web3modal/wagmi/react';
 import { createConfig } from 'wagmi';
 import { arbitrum, mainnet } from 'wagmi/chains';
 import { authConnector } from '@web3modal/wagmi';
-import { ethers } from 'ethers';
+import { JsonRpcProvider } from 'ethers';
 
 const projectId = '26dc1f824bc0b2859d173afe03a48460';
 
@@ -31,7 +31,7 @@ export const wagmiConfig = createConfig({
       },
     }),
   ],
-  publicClient: new ethers.providers.JsonRpcProvider(), 
+  publicClient: new JsonRpcProvider(), 
   projectId,
 });
 

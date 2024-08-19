@@ -16,7 +16,8 @@ import './index.css';
   import App1 from './Wallets/walletConnect-integration/App1';
   import { AppKitProvider } from './Wallets/walletConnect-integration/AppKitProvider';
   import ConnectButton from './Wallets/walletConnect-integration/ConnectButton';
-  
+  import { Buffer } from 'buffer'
+	window.Buffer = Buffer;
  
 const Main = () => {
   return (
