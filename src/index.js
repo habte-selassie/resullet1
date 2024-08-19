@@ -1,43 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
-
-
-import React from 'react';
 import ReactDOM from 'react-dom/client'; // For React 18+
-import App from './App';
-import Login from './Login/login';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { MetaMaskProvider } from "@metamask/sdk-react";
-import './index.css';
+import App from './App';
 import Appa from './Login/exampleSafeWallet';
+import Login from './Login/login';
+import AuthComponent from './AuthComponent'; // Your social login component
+import OAuthCallback from './OAuthCallback'; // Your OAuth callback component
+import './index.css';
 
-// Create a Parent component to render both App and Login
-//const Main: React.FC = () => {
-// root.render(
-//   <React.StrictMode>
-//     <MetaMaskProvider
-//       debug={false}
-//       sdkOptions={{
-//         dappMetadata: {
-//           name: "Example React Dapp",
-//           url: window.location.href,
-//         },
-//         infuraAPIKey: process.env.INFURA_API_KEY,
-//         // Other options.
-//       }}
-//     >
-//       <App />
-//     </MetaMaskProvider>
-//   </React.StrictMode>
-// );
-
-// Create a Parent component to render both App and Login
 const Main = () => {
   return (
     <MetaMaskProvider
@@ -51,52 +22,21 @@ const Main = () => {
         checkInstallationOnAllCalls: true,
         communicationServerUrl: "https://metamask-sdk-socket.metafi.codefi.network/",
         infuraAPIKey: process.env.INFURA_API_KEY,
-        
-        // Handling deeplinks
-        // openDeeplink: (link) => {
-        //   if (canOpenLink) {
-        //     Linking.openURL(link); // Opens the deeplink
-        //   }
-        // },
       }}
     >
-      <div>
-        <App />
-        <Appa />
-        <Login />
-      </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/auth" element={<AuthComponent />} />
+          <Route path="/oauth/callback" element={<OAuthCallback />} />
+          <Route path="/example-safe-wallet" element={<Appa />} />
+        </Routes>
+      </Router>
     </MetaMaskProvider>
   );
 };
 
-// Render the Parent component
-// const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-// root.render(<Main />);
-        
-        
-//         infuraAPIKey: process.env.INFURA_API_KEY,
-//         // Other options.
-      
-//       }}
-//     >
-//      <div>
-//       <App />
-//       <Login />
-//     </div>
-//     </MetaMaskProvider>
-   
-//   );
-// };
-
-// Render the Parent component
+// Render the Main component
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<Main />);
-
-
-
-// const root = ReactDOM.createRoot(
-//   document.getElementById("root") as HTMLElement
-// );
-
-
-
