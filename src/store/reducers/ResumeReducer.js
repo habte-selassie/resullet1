@@ -31,31 +31,37 @@ const resumeSlice = createSlice({
       state.educations.push(action.payload);
     },
     deleteEducation: (state, action) => {
-      state.educations = state.educations.filter((_, index) => index !== action.payload);
+      state.educations = state.educations.filter((edu) => edu.id !== action.payload);
     },
     updateEducation: (state, action) => {
-      const { index, updatedEducation } = action.payload;
-      state.educations[index] = updatedEducation;
+      const updatedEducation = action.payload;
+      state.educations = state.educations.map((edu) =>
+        edu.id === updatedEducation.id ? updatedEducation : edu
+      );
     },
     addCareer: (state, action) => {
       state.careers.push(action.payload);
     },
     deleteCareer: (state, action) => {
-      state.careers = state.careers.filter((_, index) => index !== action.payload);
+      state.careers = state.careers.filter((career) => career.id !== action.payload);
     },
     updateCareer: (state, action) => {
-      const { index, updatedCareer } = action.payload;
-      state.careers[index] = updatedCareer;
+      const updatedCareer = action.payload;
+      state.careers = state.careers.map((career) =>
+        career.id === updatedCareer.id ? updatedCareer : career
+      );
     },
     addAward: (state, action) => {
       state.awards.push(action.payload);
     },
     deleteAward: (state, action) => {
-      state.awards = state.awards.filter((_, index) => index !== action.payload);
+      state.awards = state.awards.filter((award) => award.id !== action.payload);
     },
     updateAward: (state, action) => {
-      const { index, updatedAward } = action.payload;
-      state.awards[index] = updatedAward;
+      const updatedAward = action.payload;
+      state.awards = state.awards.map((award) =>
+        award.id === updatedAward.id ? updatedAward : award
+      );
     }
   }
 });
