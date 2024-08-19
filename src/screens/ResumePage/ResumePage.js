@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { LoginInfoForm, AwardForm, EducationForm, CareerForm, SubTitleText } from '../../components';
+import { LoginInfoForm, AwardForm, EducationForm, CareerForm, SubTitleText, QRCodeGenerator } from '../../components';
 import {
   setLoginInfo,
   addEducation,
@@ -22,6 +22,7 @@ const ResumePage = () => {
 
   const [loginFormData, setLoginFormData] = useState(loginInfo);
   const [editMode, setEditMode] = useState({ login: false, education: null, career: null, award: null });
+  const [qrValue, setQrValue] = useState('');
 
   const handleAddEducation = () => {
     const newEducation = {
@@ -63,7 +64,7 @@ const ResumePage = () => {
   const handleSaveLoginInfo = (login) => {
     dispatch(setLoginInfo(login));
     setEditMode({ ...editMode, login: false });
-  }
+  };
 
   const handleSaveEducation = (edu) => {
     if (educations.find((e) => e.id === edu.id)) {
@@ -102,6 +103,12 @@ const ResumePage = () => {
 
   const handleDeleteAward = (id) => {
     dispatch(deleteAward(id));
+  };
+
+  // Function to generate QR code value
+  const handleGenerateQR = () => {
+    const qrData = JSON.stringify({ loginInfo, educations, careers, awards });
+    setQrValue(qrData);
   };
 
   return (
@@ -161,6 +168,9 @@ const ResumePage = () => {
           />
         ))}
       </div>
+
+      <button onClick={handleGenerateQR} className="generate-qr-button">Generate QR Code</button>
+      {qrValue && <QRCodeGenerator value={qrValue} />}
     </div>
   );
 };
