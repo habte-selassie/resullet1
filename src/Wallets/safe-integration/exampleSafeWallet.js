@@ -13,17 +13,17 @@ import {
 import { getSafeTxV4TypedData, getTypedData, getV3TypedData } from './typedData'
 
 function Appa() {
-  const [safeAuthPack, setSafeAuthPack] = useState<SafeAuthPack>()
+  const [safeAuthPack, setSafeAuthPack] = useState<SafeAuthPack>('')
   const [isAuthenticated, setIsAuthenticated] = useState(!!safeAuthPack?.isAuthenticated)
   const [safeAuthSignInResponse, setSafeAuthSignInResponse] = useState<AuthKitSignInData | null>(
     null
   )
   const [userInfo, setUserInfo] = useState<SafeAuthUserInfo | null>(null)
-  const [chainId, setChainId] = useState<string>()
-  const [balance, setBalance] = useState<string>()
+  const [chainId, setChainId] = useState<string>('')
+  const [balance, setBalance] = useState<string>('')
   const [consoleMessage, setConsoleMessage] = useState<string>('')
   const [consoleTitle, setConsoleTitle] = useState<string>('')
-  const [provider, setProvider] = useState<BrowserProvider>()
+  const [provider, setProvider] = useState<BrowserProvider>('')
 
   useEffect(() => {
     // @ts-expect-error - Missing globals
@@ -31,7 +31,7 @@ function Appa() {
     const chainId = params.get('chainId')
 
     ;(async () => {
-      const options: SafeAuthInitOptions = {
+      const options = {
         enableLogging: true,
         buildEnv: 'production',
         chainConfig: {
@@ -73,13 +73,13 @@ function Appa() {
       setUserInfo(userInfo)
 
       if (web3Provider) {
-        const provider = new BrowserProvider(safeAuthPack.getProvider() as Eip1193Provider)
+        const provider = new BrowserProvider(safeAuthPack.getProvider())
         const signer = await provider.getSigner()
         const signerAddress = await signer.getAddress()
 
         setChainId((await provider?.getNetwork()).chainId.toString())
         setBalance(
-          ethers.formatEther((await provider.getBalance(signerAddress)) as ethers.BigNumberish)
+          ethers.formatEther((await provider.getBalance(signerAddress)))
         )
         setProvider(provider)
       }
@@ -125,12 +125,12 @@ function Appa() {
     uiConsole('ChainId', chainId)
   }
 
-  const signAndExecuteSafeTx = async (index: number) => {
+  const signAndExecuteSafeTx = async (index) => {
     const safeAddress = safeAuthSignInResponse?.safes?.[index] || '0x'
 
     // Wrap Web3Auth provider with ethers
     const protocolKit = await Safe.init({
-      provider: safeAuthPack?.getProvider() as Eip1193Provider,
+      provider: safeAuthPack?.getProvider() ,
       safeAddress
     })
 
@@ -154,7 +154,7 @@ function Appa() {
     uiConsole('Safe Transaction Result', txResult)
   }
 
-  const signMessage = async (data: any, method: string) => {
+  const signMessage = async (data, method) => {
     let signedMessage
 
     const params = {
@@ -214,7 +214,7 @@ function Appa() {
     uiConsole(`Add chain`, result)
   }
 
-  const uiConsole = (title: string, message: unknown) => {
+  const uiConsole = (title, message) => {
     setConsoleTitle(title)
     setConsoleMessage(typeof message === 'string' ? message : JSON.stringify(message, null, 2))
   }

@@ -8,8 +8,8 @@
     "@metamask/sdk-react-ui": "^0.27.0",
     "magic-sdk": "^28.4.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1"
+    "react-dom": "^18.3.1"
+    
   },
   "scripts": {
     "start": "react-scripts start",
