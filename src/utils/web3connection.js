@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers, formatEther } from "ethers";
 
 export const getbalance = (address, callback) => {
 	window.ethereum
@@ -7,7 +7,7 @@ export const getbalance = (address, callback) => {
 			params: [address, "latest"],
 		})
 		.then((balance) => {
-			callback(ethers.utils.formatEther(balance));
+			callback(formatEther(balance));
 		});
 };
 
