@@ -1,0 +1,261 @@
+.form-group {
+  margin-bottom: 1em;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error {
+  color: red;
+  margin-top: 0.5em;
+}
+
+.sub-content-action {
+  margin-top: 1em;
+}
+
+.save-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.education-form, .login-info-form, .career-form, .award-form {
+  padding: 10px;
+}
+/* General form styles */
+form {
+  margin-bottom: 1em;
+}
+
+button {
+  margin-right: 0.5em;
+}
+
+/* Education Form Styles */
+.education-form {
+  margin-bottom: 1.5em;
+}
+
+.education-form .education-info {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.education-form .education-info p {
+  margin: 0.5em 0;
+}
+
+.education-form .education-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.education-form .education-header h4 {
+  margin: 0;
+}
+
+.education-form .edit-button,
+.education-form .delete-button {
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+}
+
+.education-form .edit-button:hover,
+.education-form .delete-button:hover {
+  color: blue;
+}
+
+.education-form .save-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+  margin-right: 0.5em;
+}
+
+.education-form .save-button:hover {
+  background-color: #218838;
+}
+
+.education-form .cancel-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+}
+
+.education-form .cancel-button:hover {
+  background-color: #c82333;
+}
+
+/* Career Form Styles */
+.career-form {
+  margin-bottom: 1.5em;
+}
+
+.career-form .career-info {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.career-form .career-info p {
+  margin: 0.5em 0;
+}
+
+.career-form .career-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.career-form .career-header h4 {
+  margin: 0;
+}
+
+.career-form .edit-button,
+.career-form .delete-button {
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+}
+
+.career-form .edit-button:hover,
+.career-form .delete-button:hover {
+  color: blue;
+}
+
+.career-form .save-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+  margin-right: 0.5em;
+}
+
+.career-form .save-button:hover {
+  background-color: #218838;
+}
+
+.career-form .cancel-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+}
+
+.career-form .cancel-button:hover {
+  background-color: #c82333;
+}
+
+/* Award Form Styles */
+.award-form {
+  margin-bottom: 1.5em;
+}
+
+.award-form .award-info {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.award-form .award-info p {
+  margin: 0.5em 0;
+}
+
+.award-form .award-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.award-form .award-header h4 {
+  margin: 0;
+}
+
+.award-form .edit-button,
+.award-form .delete-button {
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+}
+
+.award-form .edit-button:hover,
+.award-form .delete-button:hover {
+  color: blue;
+}
+
+.award-form .save-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+  margin-right: 0.5em;
+}
+
+.award-form .save-button:hover {
+  background-color: #218838;
+}
+
+.award-form .cancel-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+}
+
+.award-form .cancel-button:hover {
+  background-color: #c82333;
+}
