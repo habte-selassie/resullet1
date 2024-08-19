@@ -1,0 +1,48 @@
+.home-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.home-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.project-overview, .project-problems, .project-solutions, .project-advantages, .project-key-points, .project-detailed-explanation {
+  margin-bottom: 30px;
+}
+
+.project-overview h2, .project-problems h2, .project-solutions h2, .project-advantages h2, .project-key-points h2, .project-detailed-explanation h2 {
+  font-size: 2rem;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.project-problems ul, .project-solutions ol, .project-advantages ul, .project-key-points ul {
+  margin-left: 20px;
+}
+
+.project-detailed-explanation p {
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 15px;
+  }
+
+  .home-header h1 {
+    font-size: 2rem;
+  }
+
+  .project-overview h2, .project-problems h2, .project-solutions h2, .project-advantages h2, .project-key-points h2, .project-detailed-explanation h2 {
+    font-size: 1.5rem;
+  }
+}

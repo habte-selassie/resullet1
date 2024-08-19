@@ -8,6 +8,7 @@
     "@metamask/sdk-react-ui": "^0.27.0",
     "@openzeppelin/contracts": "~5.0.2",
     "@reduxjs/toolkit": "^2.2.6",
+    "@supabase/auth-ui-shared": "^0.1.8",
     "ethers": "~5.7.2",
     "localforage": "~1.10.0",
     "magic-sdk": "^28.4.0",
