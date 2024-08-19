@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { LoginInfoForm, AwardForm, EducationForm, CareerForm, SubTitleText } from '../../components';
+import { LoginInfoForm, AwardForm, EducationForm, CareerForm, SubTitleText, QRCodeGenerator } from '../../components';
 import {
+  setLoginInfo,
   addEducation,
   deleteEducation,
   updateEducation,
@@ -20,166 +21,156 @@ const ResumePage = () => {
   const { loginInfo, educations, careers, awards } = initialInfo;
 
   const [loginFormData, setLoginFormData] = useState(loginInfo);
-  const [newEducation, setNewEducation] = useState(null);
-  const [newCareer, setNewCareer] = useState(null);
-  const [newAward, setNewAward] = useState(null);
+  const [editMode, setEditMode] = useState({ login: false, education: null, career: null, award: null });
+  const [qrValue, setQrValue] = useState('');
 
   const handleAddEducation = () => {
-    setNewEducation({
-      id: Date.now(), // Unique identifier
+    const newEducation = {
+      id: Date.now(),
       institution: '',
       degree: '',
       fieldOfStudy: '',
       startDate: '',
       endDate: '',
-    });
+    };
+    dispatch(addEducation(newEducation));
+    setEditMode({ ...editMode, education: newEducation.id });
   };
 
   const handleAddCareer = () => {
-    setNewCareer({
+    const newCareer = {
       id: Date.now(),
       company: '',
       position: '',
       startDate: '',
       endDate: '',
       description: '',
-    });
+    };
+    dispatch(addCareer(newCareer));
+    setEditMode({ ...editMode, career: newCareer.id });
   };
 
   const handleAddAward = () => {
-    setNewAward({
+    const newAward = {
       id: Date.now(),
       title: '',
       date: '',
       organization: '',
-    });
+    };
+    dispatch(addAward(newAward));
+    setEditMode({ ...editMode, award: newAward.id });
   };
 
-  const handleSaveEducation = (eduData) => {
-    dispatch(addEducation(eduData));
-    setNewEducation(null);
+  const handleSaveLoginInfo = (login) => {
+    dispatch(setLoginInfo(login));
+    setEditMode({ ...editMode, login: false });
   };
 
-  const handleSaveCareer = (careerData) => {
-    dispatch(addCareer(careerData));
-    setNewCareer(null);
+  const handleSaveEducation = (edu) => {
+    if (educations.find((e) => e.id === edu.id)) {
+      dispatch(updateEducation(edu));
+    } else {
+      dispatch(addEducation(edu));
+    }
+    setEditMode({ ...editMode, education: null });
   };
 
-  const handleSaveAward = (awardData) => {
-    dispatch(addAward(awardData));
-    setNewAward(null);
+  const handleSaveCareer = (career) => {
+    if (careers.find((c) => c.id === career.id)) {
+      dispatch(updateCareer(career));
+    } else {
+      dispatch(addCareer(career));
+    }
+    setEditMode({ ...editMode, career: null });
   };
 
-  const handleDeleteEducation = (index) => {
-    dispatch(deleteEducation(index));
+  const handleSaveAward = (award) => {
+    if (awards.find((a) => a.id === award.id)) {
+      dispatch(updateAward(award));
+    } else {
+      dispatch(addAward(award));
+    }
+    setEditMode({ ...editMode, award: null });
   };
 
-  const handleUpdateEducation = (index, updatedEduData) => {
-    dispatch(updateEducation({ index, updatedEducation: updatedEduData }));
+  const handleDeleteEducation = (id) => {
+    dispatch(deleteEducation(id));
   };
 
-  const handleDeleteCareer = (index) => {
-    dispatch(deleteCareer(index));
+  const handleDeleteCareer = (id) => {
+    dispatch(deleteCareer(id));
   };
 
-  const handleUpdateCareer = (index, updatedCareerData) => {
-    dispatch(updateCareer({ index, updatedCareer: updatedCareerData }));
+  const handleDeleteAward = (id) => {
+    dispatch(deleteAward(id));
   };
 
-  const handleDeleteAward = (index) => {
-    dispatch(deleteAward(index));
-  };
-
-  const handleUpdateAward = (index, updatedAwardData) => {
-    dispatch(updateAward({ index, updatedAward: updatedAwardData }));
-  };
-
-  const handleMint = () => {
-    console.log('Minting dNFT...');
+  // Function to generate QR code value
+  const handleGenerateQR = () => {
+    const qrData = JSON.stringify({ loginInfo, educations, careers, awards });
+    setQrValue(qrData);
   };
 
   return (
     <div className="resume-page">
-      <h1>Create Your Resume</h1>
+      <div className="resume-section">
+        <SubTitleText 
+          content="Login Info" 
+          isEditing={editMode.login} 
+          toggleEditMode={() => setEditMode(prev => ({ ...prev, login: !prev.login }))}
+        />
+        <LoginInfoForm formData={loginFormData} setFormData={setLoginFormData} isEditing={editMode.login} handleSave={handleSaveLoginInfo}/>
 
-      <LoginInfoForm formData={loginFormData} setFormData={setLoginFormData} />
-
-      <SubTitleText content="Education" />
-      {educations.map((eduData, index) => (
-        <div key={eduData.id}>
+        <SubTitleText 
+          content="Education" 
+          showAddButton={!editMode.education} 
+          onAddClick={handleAddEducation} 
+        />
+        {educations.map((edu) => (
           <EducationForm
-            eduData={eduData}
-            setEduData={(updatedEduData) => handleUpdateEducation(index, updatedEduData)}
+            key={edu.id}
+            formData={edu}
+            setFormData={(newEdu) => (editMode.education === edu.id ? handleSaveEducation(newEdu) : null)}
+            isEditing={editMode.education === edu.id}
+            handleDelete={() => handleDeleteEducation(edu.id)}
           />
-          <button onClick={() => handleDeleteEducation(index)}>Delete Education</button>
-        </div>
-      ))}
-      {newEducation && (
-        <div>
-          <EducationForm
-            eduData={newEducation}
-            setEduData={setNewEducation}
-          />
-          <div className="sub-content-action">
-            <button className="cancel-button" onClick={() => setNewEducation(null)}>Cancel</button>
-            <button className="save-button" onClick={() => handleSaveEducation(newEducation)}>Save</button>
-          </div>
-        </div>
-      )}
-      <button onClick={handleAddEducation} className="add-button">Add Education</button>
-
-      <SubTitleText content="Career" />
-      {careers.map((careerData, index) => (
-        <div key={careerData.id}>
-          <CareerForm
-            careerData={careerData}
-            setCareerData={(updatedCareerData) => handleUpdateCareer(index, updatedCareerData)}
-          />
-          <button onClick={() => handleDeleteCareer(index)}>Delete Career</button>
-        </div>
-      ))}
-      {newCareer && (
-        <div>
-          <CareerForm
-            careerData={newCareer}
-            setCareerData={setNewCareer}
-          />
-          <div className="sub-content-action">
-            <button className="cancel-button" onClick={() => setNewCareer(null)}>Cancel</button>
-            <button className="save-button" onClick={() => handleSaveCareer(newCareer)}>Save</button>
-          </div>
-        </div>
-      )}
-      <button onClick={handleAddCareer} className="add-button">Add Career</button>
-
-      <SubTitleText content="Awards" />
-      {awards.map((awardData, index) => (
-        <div key={awardData.id}>
-          <AwardForm
-            awardData={awardData}
-            setAwardData={(updatedAwardData) => handleUpdateAward(index, updatedAwardData)}
-          />
-          <button onClick={() => handleDeleteAward(index)}>Delete Award</button>
-        </div>
-      ))}
-      {newAward && (
-        <div>
-          <AwardForm
-            awardData={newAward}
-            setAwardData={setNewAward}
-          />
-          <div className="sub-content-action">
-            <button className="cancel-button" onClick={() => setNewAward(null)}>Cancel</button>
-            <button className="save-button" onClick={() => handleSaveAward(newAward)}>Save</button>
-          </div>
-        </div>
-      )}
-      <button onClick={handleAddAward} className="add-button">Add Award</button>
-
-      <div className="dnft-minting">
-        <h2>dNFT Minting</h2>
-        <button onClick={handleMint}>Mint dNFT</button>
+        ))}
       </div>
+      <div className="resume-section">
+        <SubTitleText 
+          content="Career" 
+          showAddButton={!editMode.career} 
+          onAddClick={handleAddCareer} 
+        />
+        {careers.map((career) => (
+          <CareerForm
+            key={career.id}
+            formData={career}
+            setFormData={(newCareer) => (editMode.career === career.id ? handleSaveCareer(newCareer) : null)}
+            isEditing={editMode.career === career.id}
+            handleDelete={() => handleDeleteCareer(career.id)}
+          />
+        ))}
+      </div>
+      <div className="resume-section">
+        <SubTitleText 
+          content="Awards" 
+          showAddButton={!editMode.award} 
+          onAddClick={handleAddAward} 
+        />
+        {awards.map((award) => (
+          <AwardForm
+            key={award.id}
+            formData={award}
+            setFormData={(newAward) => (editMode.award === award.id ? handleSaveAward(newAward) : null)}
+            isEditing={editMode.award === award.id}
+            handleDelete={() => handleDeleteAward(award.id)}
+          />
+        ))}
+      </div>
+
+      <button onClick={handleGenerateQR} className="generate-qr-button">Generate QR Code</button>
+      {qrValue && <QRCodeGenerator value={qrValue} />}
     </div>
   );
 };
