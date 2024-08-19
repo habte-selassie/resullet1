@@ -1,20 +1,18 @@
-import React from 'react'
-import './Form.css'
+import React from 'react';
+import './Form.css';
 
-function FormTextArea (props) {
-    const { label, content, name, handleChange, error, required } = props;
-    return (
-        <div className="form-group">
-            <label>{label}<span className='require'>{required ? '*' : ''}</span></label>
-            <textarea
-                type="text"
-                name={name}
-                value={content}
-                onChange={handleChange}
-            />
-            {error && <span className="error">{error}</span>}
-        </div>
-    )
+function FormTextArea({ label, name, value, handleChange, error }) {
+  return (
+    <div className="form-group">
+      <label>{label}</label>
+      <textarea
+        name={name}
+        value={value}
+        onChange={handleChange}
+      />
+      {error && <div className="error">{error}</div>}
+    </div>
+  );
 }
 
 export default FormTextArea;

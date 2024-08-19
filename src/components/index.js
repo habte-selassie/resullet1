@@ -7,3 +7,5 @@ export {
   FormInput,
   FormTextArea
 } from './createResume'
+
+export { QRCodeGenerator } from './qrcodeGenerator'

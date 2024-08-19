@@ -1,85 +1,261 @@
 .form-group {
-	margin-bottom: 15px;
+  margin-bottom: 1em;
 }
 
 .form-group label {
-	display: block;
-	margin-bottom: 5px;
-	font-weight: bold;
+  display: block;
+  margin-bottom: 0.5em;
 }
 
-.form-group input {
-	width: 100%;
-	padding: 8px;
-	font-size: 14px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-}
-
+.form-group input,
 .form-group textarea {
-	width: 100%;
-	padding: 8px;
-	font-size: 14px;
-	height: 100px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	resize: none;
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .error {
-	color: red;
-	font-size: 12px;
-	margin-top: 5px;
-}
-
-.require {
-	color: red;
-	font-size: 16px;
-	padding-left: 5px;
-}
-
-.add-button {
-	background-color: transparent;
-	color: gray;
-	padding: 10px;
-	width: 200px;
-	margin-left: 20px;
-	border: 1px solid lightgray;
-	border-radius: 10px;
-}
-  
-.sub-content {
-	padding: 30px;
+  color: red;
+  margin-top: 0.5em;
 }
 
 .sub-content-action {
-	display: flex;
-	width: 100%;
-	justify-content: space-between;
+  margin-top: 1em;
 }
 
-.sub-content-action button {
-  padding: 10px 20px;
+.save-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.education-form, .login-info-form, .career-form, .award-form {
+  padding: 10px;
+}
+/* General form styles */
+form {
+  margin-bottom: 1em;
+}
+
+button {
+  margin-right: 0.5em;
+}
+
+/* Education Form Styles */
+.education-form {
+  margin-bottom: 1.5em;
+}
+
+.education-form .education-info {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.education-form .education-info p {
+  margin: 0.5em 0;
+}
+
+.education-form .education-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.education-form .education-header h4 {
+  margin: 0;
+}
+
+.education-form .edit-button,
+.education-form .delete-button {
   border: none;
   border-radius: 5px;
+  padding: 0.5em 1em;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 0.875em;
 }
 
-/* Styles for active buttons */
-.sub-content-action button.save-button {
-  background-color: #4CAF50; /* Green */
+.education-form .edit-button:hover,
+.education-form .delete-button:hover {
+  color: blue;
+}
+
+.education-form .save-button {
+  background-color: #28a745;
   color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+  margin-right: 0.5em;
 }
 
-.sub-content-action button.cancel-button {
-  background-color: #f44336; /* Red */
+.education-form .save-button:hover {
+  background-color: #218838;
+}
+
+.education-form .cancel-button {
+  background-color: #dc3545;
   color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
 }
 
-/* Styles for disabled buttons */
-.sub-content-action button:disabled {
-  background-color: #cccccc; /* Light grey */
-  color: #666666; /* Dark grey */
-  cursor: not-allowed;
+.education-form .cancel-button:hover {
+  background-color: #c82333;
+}
+
+/* Career Form Styles */
+.career-form {
+  margin-bottom: 1.5em;
+}
+
+.career-form .career-info {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.career-form .career-info p {
+  margin: 0.5em 0;
+}
+
+.career-form .career-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.career-form .career-header h4 {
+  margin: 0;
+}
+
+.career-form .edit-button,
+.career-form .delete-button {
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+}
+
+.career-form .edit-button:hover,
+.career-form .delete-button:hover {
+  color: blue;
+}
+
+.career-form .save-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+  margin-right: 0.5em;
+}
+
+.career-form .save-button:hover {
+  background-color: #218838;
+}
+
+.career-form .cancel-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+}
+
+.career-form .cancel-button:hover {
+  background-color: #c82333;
+}
+
+/* Award Form Styles */
+.award-form {
+  margin-bottom: 1.5em;
+}
+
+.award-form .award-info {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.award-form .award-info p {
+  margin: 0.5em 0;
+}
+
+.award-form .award-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.award-form .award-header h4 {
+  margin: 0;
+}
+
+.award-form .edit-button,
+.award-form .delete-button {
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+}
+
+.award-form .edit-button:hover,
+.award-form .delete-button:hover {
+  color: blue;
+}
+
+.award-form .save-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+  margin-right: 0.5em;
+}
+
+.award-form .save-button:hover {
+  background-color: #218838;
+}
+
+.award-form .cancel-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 0.875em;
+}
+
+.award-form .cancel-button:hover {
+  background-color: #c82333;
 }
