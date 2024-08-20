@@ -90,13 +90,13 @@ export default function Login() {
 				data-use_fedcm_for_prompt="true"
 			></div> */}
 			<GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-			<img
+			{/* <img
 				onClick={linkedInLogin}
 				src={linkedin}
 				alt="Sign in with Linked In"
 				style={{ paddingTop: "20px", maxWidth: "180px", cursor: "pointer" }}
-			/>
-			{/* <LinkedInOAuth /> */}
+			/> */}
+			<LinkedInOAuth />
 			{/* <div
 				className="g_id_signin"
 				data-type="standard"
