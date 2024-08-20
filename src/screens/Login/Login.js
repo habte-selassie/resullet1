@@ -57,7 +57,7 @@ export default function Login() {
 	}, []);
 
 	const responseMessage = async (response) => {
-		await localStorage.setItem("loginData", response);
+		await localStorage.setItem("loginData", JSON.stringify(response));
 		<Navigate to="/resume" />;
 	};
 	const errorMessage = (error) => {
