@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import FormInput from './FormInput';
 import './Form.css';
 
-const CareerForm = ({ formData, setFormData, isEditing, handleDelete }) => {
+const CareerForm = ({ formData, setFormData, isEditing, handleDelete, handleCancel }) => {
   const [data, setData] = useState(formData);
+  const [editMode, setEditMode] = useState(isEditing);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     setData(formData);
-  }, [formData]);
-
-  const [errors, setErrors] = useState({});
+    setEditMode(isEditing); // Update edit mode based on props
+  }, [formData, isEditing]);
 
   const validate = () => {
     const newErrors = {};
@@ -26,6 +27,7 @@ const CareerForm = ({ formData, setFormData, isEditing, handleDelete }) => {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       setFormData(data);
+      setEditMode(false); // Exit edit mode after saving
     }
   };
 
@@ -34,13 +36,15 @@ const CareerForm = ({ formData, setFormData, isEditing, handleDelete }) => {
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleCancel = () => {
+  const cancelEdit = () => {
     setData(formData);
+    setEditMode(false); // Exit edit mode on cancel
+    handleCancel();
   };
 
   return (
     <div className="career-form">
-      {isEditing ? (
+      {editMode ? (
         <>
           <FormInput label="Company" name="company" content={data.company} handleChange={handleChange} error={errors.company} required />
           <FormInput label="Position" name="position" content={data.position} handleChange={handleChange} error={errors.position} required />
@@ -48,14 +52,16 @@ const CareerForm = ({ formData, setFormData, isEditing, handleDelete }) => {
           <FormInput label="End Date" name="endDate" type="date" content={data.endDate} handleChange={handleChange} error={errors.endDate} required />
           <FormInput label="Description" name="description" content={data.description} handleChange={handleChange} error={errors.description} />
           <button onClick={handleSave} className="save-button">Save</button>
-          <button onClick={handleCancel}>Cancel</button>
+          <button onClick={cancelEdit} className='cancel-button'>Cancel</button>
         </>
       ) : (
         <div className="career-info">
           <div className="career-header">
             <h4>{data.position}</h4>
-            <button onClick={handleDelete} className="delete-button">Delete</button>
-            <button onClick={() => setFormData({ ...formData, isEditing: true })} className="edit-button">Edit</button>
+            <div>
+              <button onClick={handleDelete} className="delete-button">Delete</button>
+              <button onClick={() => setEditMode(true)} className="edit-button">Edit</button>
+            </div>
           </div>
           <p>{data.company}</p>
           <p>{data.startDate} - {data.endDate}</p>
@@ -70,7 +76,8 @@ CareerForm.propTypes = {
   formData: PropTypes.object.isRequired,
   setFormData: PropTypes.func.isRequired,
   isEditing: PropTypes.bool.isRequired,
-  handleDelete: PropTypes.func.isRequired
+  handleDelete: PropTypes.func.isRequired,
+  handleCancel: PropTypes.func.isRequired
 };
 
 export default CareerForm;

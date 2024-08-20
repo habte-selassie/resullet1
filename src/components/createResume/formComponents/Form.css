@@ -41,6 +41,15 @@
   cursor: pointer;
 }
 
+.full-name {
+  font-size: 20px;
+  font-style: italic;
+}
+
+.job-title {
+  font-size: 14px;
+}
+
 .education-form, .login-info-form, .career-form, .award-form {
   padding: 10px;
 }

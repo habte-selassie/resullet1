@@ -3,22 +3,44 @@ import PropTypes from 'prop-types';
 import FormInput from './FormInput';
 import './Form.css';
 
-const LoginInfoForm = ({ formData, setFormData, isEditing, handleSave }) => {
+const LoginInfoForm = ({ formData, setFormData, isEditing, handleSave, handleCancel }) => {
   const [localFormData, setLocalFormData] = useState(formData);
   const [errors, setErrors] = useState({});
 
   const validate = () => {
     const newErrors = {};
+    const urlPattern = /^(https?:\/\/[^\s/$.?#].[^\s]*)$/i;
     if (!localFormData.full_name.trim()) newErrors.full_name = 'Full Name is required';
     if (!localFormData.job_title.trim()) newErrors.job_title = 'Job Title is required';
     if (!localFormData.description.trim()) newErrors.description = 'Description is required';
-    if (!localFormData.phone.trim()) newErrors.phone = 'Phone Number is required';
     if (!localFormData.address.trim()) newErrors.address = 'Address is required';
     if (!localFormData.region.trim()) newErrors.region = 'Region is required';
     if (!localFormData.github.trim()) newErrors.github = 'Github URL is required';
     if (!localFormData.linkedin.trim()) newErrors.linkedin = 'LinkedIn URL is required';
     if (!localFormData.telegram.trim()) newErrors.telegram = 'Telegram ID is required';
     if (!localFormData.twitter.trim()) newErrors.twitter = 'Twitter URL is required';
+    if (!localFormData.github.trim()) newErrors.github = 'Github URL is required';
+    if (!localFormData.linkedin.trim()) newErrors.linkedin = 'LinkedIn URL is required';
+    if (!localFormData.telegram.trim()) newErrors.telegram = 'Telegram ID is required';
+    if (!localFormData.twitter.trim()) newErrors.twitter = 'Twitter URL is required';
+    if (!localFormData.phone.trim()) newErrors.phone = 'Phone Number is required';
+    else {
+        const phonePattern = /^\+?[1-9]\d{1,14}$/;
+        if (!phonePattern.test(localFormData.phone.trim())) {
+            newErrors.phone = 'Phone Number is invalid';
+        }
+    }
+    
+    if (localFormData.github && !urlPattern.test(localFormData.github.trim())) {
+        newErrors.github = 'Github URL is invalid';
+    }
+    if (localFormData.linkedin && !urlPattern.test(localFormData.linkedin.trim())) {
+        newErrors.linkedin = 'LinkedIn URL is invalid';
+    }
+    if (localFormData.twitter && !urlPattern.test(localFormData.twitter.trim())) {
+        newErrors.twitter = 'Twitter URL is invalid';
+    }
+
     return newErrors;
   };
 
@@ -39,6 +61,11 @@ const LoginInfoForm = ({ formData, setFormData, isEditing, handleSave }) => {
     });
   };
 
+  const cancelEdit = () => {
+    setLocalFormData(formData);
+    handleCancel();
+  }
+
   return (
     <div className="login-info-form">
       {isEditing ? (
@@ -54,12 +81,12 @@ const LoginInfoForm = ({ formData, setFormData, isEditing, handleSave }) => {
           <FormInput label="Telegram ID" name="telegram" content={localFormData.telegram} handleChange={handleChange} error={errors.telegram} required />
           <FormInput label="Twitter URL" name="twitter" content={localFormData.twitter} handleChange={handleChange} error={errors.twitter} required />
           <button onClick={handleSaveClick} className="save-button">Save</button>
+          <button onClick={handleCancel} className="">Cancel</button>
         </>
       ) : (
-        <div className="login-info-display">
-          <p>Full Name: {formData.full_name}</p>
-          <p>Job Title: {formData.job_title}</p>
-          <p>Description: {formData.description}</p>
+        <div>
+          <p className='full-name'>{formData.full_name} | <span className='job-title'>{formData.job_title}</span></p>
+          <p>{formData.description}</p>
           <p>Phone Number: {formData.phone}</p>
           <p>Address: {formData.address}</p>
           <p>Region: {formData.region}</p>
