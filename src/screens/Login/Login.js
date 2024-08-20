@@ -63,7 +63,7 @@ export default function Login() {
 	};
 
 	const { linkedInLogin } = useLinkedIn({
-		clientId: "779zaqubaebau1",
+		clientId: process.env.LINKEDIN_CLIENT_ID,
 		redirectUri: "https://resullet1.vercel.app/auth/linkedin/callback", // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
 		// redirectUri: "http://localhost:3000/auth/linkedin/callback", // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
 		onSuccess: (code) => {
@@ -92,7 +92,7 @@ export default function Login() {
 				onClick={linkedInLogin}
 				src={linkedin}
 				alt="Sign in with Linked In"
-				style={{ paddingTop: "20px", maxWidth: "261px", cursor: "pointer" }}
+				style={{ paddingTop: "20px", maxWidth: "180px", cursor: "pointer" }}
 			/>
 			{/* <LinkedInOAuth /> */}
 			{/* <div
