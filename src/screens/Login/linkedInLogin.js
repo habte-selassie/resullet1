@@ -1,9 +1,5 @@
 import React from "react";
 
-const LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET;
-const LINKEDIN_CLIENT_ID = process.env.LINKEDIN_CLIENT_ID;
-const LINKEDIN_CALLBACK_URL = process.env.LINKEDIN_CALLBACK_URL;
-
 const linkedinOAuthURL = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${
 	process.env.LINKEDIN_CLIENT_ID
 }&redirect_uri=${encodeURIComponent(
@@ -11,6 +7,10 @@ const linkedinOAuthURL = `https://www.linkedin.com/oauth/v2/authorization?respon
 )}&scope=r_liteprofile%20r_emailaddress`;
 
 const LinkedInOAuth = () => {
+
+	console.log("environment variables : ", process.env.LINKEDIN_CALLBACK_URL)
+	console.log("environment variables : ", process.env.LINKEDIN_CLIENT_ID)
+	console.log("environment variables : ", process.env.LINKEDIN_CLIENT_SECRET)
 	const handleLogin = async (code) => {
 		// Exchange the code for an access token
 		const data = await fetch("https://www.linkedin.com/oauth/v2/accessToken", {
