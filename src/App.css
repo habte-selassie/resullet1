@@ -1,59 +1,61 @@
-/* App.css */
+/* Base styles for navbar */
 .navbar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
-  background-color: #007BFF; /* Bootstrap primary color */
-  color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #007BFF; /* Use variables for easy theme adjustments */
+  color: white; /* Use variables for easy theme adjustments */
+  border-bottom: 1px solid #ddd;
 }
 
-.navbar a {
-  color: white;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.navbar a:hover {
-  background-color: #0056b3; /* Darker shade of blue */
-  color: #fff;
-}
-
-.navbar .brand {
+.brand {
   font-size: 1.5rem;
+  text-decoration: none;
+  color: inherit;
   font-weight: bold;
 }
 
-.navbar .links {
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-links {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 15px;
 }
 
-.navbar .links a {
+.nav-link {
+  text-decoration: none;
+  color: inherit;
   font-size: 1rem;
-  font-weight: 500;
+  padding: 5px 10px;
 }
 
-/* Responsive design for mobile view */
+/* Responsive styles */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
   }
-  
-  .navbar .links {
+
+  .nav-links {
+    display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 10px;
+    margin-top: 10px;
   }
-  
-  .navbar .links a {
+
+  .nav-link {
     width: 100%;
     text-align: center;
-    padding: 0.75rem;
   }
 }
+
 
 /* Light Mode */
 .light-mode {

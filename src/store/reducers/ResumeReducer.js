@@ -3,20 +3,39 @@ import { createSlice } from '@reduxjs/toolkit';
 // Define the initial state
 const initialState = {
   loginInfo: {
-    full_name: '',
-    job_title: '',
-    description: '',
-    phone: '',
-    address: '',
-    region: '',
-    github: '',
-    linkedin: '',
-    telegram: '',
-    twitter: ''
+    full_name: 'James Wong',
+    job_title: 'Software Developer',
+    description: 'As a professional software developer, I possess extensive experience across the entire web development process, from front-end design to deployment. I have also worked with a diverse range of technology stacks in web, mobile, and blockchain fields',
+    phone: '11111111',
+    address: 'road, street, city',
+    region: 'Country',
+    github: 'https://github.com/xyz',
+    linkedin: 'https://www.linkedin.com/in/xyz',
+    telegram: 'TelegramID',
+    twitter: 'https://twitter.com/xyz'
   },
-  educations: [],
-  careers: [],
-  awards: []
+  educations: [{
+    id: Date.now(),
+    institution: 'University',
+    degree: 'Bachelor\'s degree',
+    fieldOfStudy: 'Computer Science',
+    startDate: '2020-01-01',
+    endDate: '2022-01-01',
+  }],
+  careers: [{
+    id: Date.now(),
+    company: 'Company',
+    position: 'Software Developer',
+    startDate: '2022-04-01',
+    endDate: '2022-10-01',
+    description: 'Worked as a software developer',
+  }],
+  awards: [{
+    id: Date.now(),
+    title: 'Award',
+    date: '2022-01-01',
+    organization: 'Code Challenge',
+  }]
 };
 
 // Create a slice of the Redux store

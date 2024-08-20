@@ -84,10 +84,9 @@ const LoginInfoForm = ({ formData, setFormData, isEditing, handleSave, handleCan
           <button onClick={handleCancel} className="">Cancel</button>
         </>
       ) : (
-        <div className="login-info-display">
-          <p>Full Name: {formData.full_name}</p>
-          <p>Job Title: {formData.job_title}</p>
-          <p>Description: {formData.description}</p>
+        <div>
+          <p className='full-name'>{formData.full_name} | <span className='job-title'>{formData.job_title}</span></p>
+          <p>{formData.description}</p>
           <p>Phone Number: {formData.phone}</p>
           <p>Address: {formData.address}</p>
           <p>Region: {formData.region}</p>

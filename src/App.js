@@ -35,18 +35,15 @@ function App() {
           <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
             <nav className="navbar">
               <Link to="/" className="brand">RESULLET</Link>
-              <div className="links">
-                <button onClick={toggleDarkMode}>
-                  {isDarkMode ? <img src={darkImage} alt='' width={24}/> : <img src={lightImage} alt='' width={24}/>}
+              <div className="nav-links">
+                <button className="theme-toggle" onClick={toggleDarkMode}>
+                  <img src={isDarkMode ? darkImage : lightImage} alt='' width={24} />
                 </button>
-              <div className="links">
-                <Link to="/" className="home-link">Home</Link>
-                <Link to="/resume" className="resume-link">Resume</Link>
-                {/* <Link to="/appa" className="appa-link">Appa</Link> */}
-                {/* <Link to="/appa" className="appa-link">Appa</Link> */}
-                <Link to="/login" className="login-link">Login</Link>
-                <Link to="/regist" className="login-link">Register</Link>
-              </div>
+                <Link to="/" className="nav-link">Home</Link>
+                <Link to="/resume" className="nav-link">Resume</Link>
+                {/* <Link to="/appa" className="nav-link">Appa</Link> */}
+                <Link to="/login" className="nav-link">Login</Link>
+                <Link to="/regist" className="nav-link">Register</Link>
               </div>
             </nav>
     
