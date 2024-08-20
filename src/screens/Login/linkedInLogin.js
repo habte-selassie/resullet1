@@ -1,8 +1,8 @@
 import React from "react";
 
-const LINKEDIN_CLIENT_SECRET = process.env.REACT_APP_LINKEDIN_CLIENT_SECRET;
-const LINKEDIN_CLIENT_ID = process.env.REACT_APP_LINKEDIN_CLIENT_ID;
-const LINKEDIN_CALLBACK_URL = process.env.REACT_APP_LINKEDIN_CALLBACK_URL;
+const LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET;
+const LINKEDIN_CLIENT_ID = process.env.LINKEDIN_CLIENT_ID;
+const LINKEDIN_CALLBACK_URL = process.env.LINKEDIN_CALLBACK_URL;
 
 const linkedinOAuthURL = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${
 	process.env.LINKEDIN_CLIENT_ID
