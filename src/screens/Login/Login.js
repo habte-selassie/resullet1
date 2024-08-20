@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { supabase } from "@supabase/auth-ui-shared";
+import { Navigate } from "react-router-dom";
 // import LinkedInOAuth from "./linkedInLogin";
 import { useLinkedIn } from "react-linkedin-login-oauth2";
 import linkedin from "react-linkedin-login-oauth2/assets/linkedin.png";
@@ -55,8 +56,9 @@ export default function Login() {
 		window.handleSignInWithGoogle = handleSignInWithGoogle; // Expose the function to the global scope
 	}, []);
 
-	const responseMessage = (response) => {
-		console.log(response);
+	const responseMessage = async (response) => {
+		await localStorage(response);
+		<Navigate to="/resume" />;
 	};
 	const errorMessage = (error) => {
 		console.log("the error:", error);
