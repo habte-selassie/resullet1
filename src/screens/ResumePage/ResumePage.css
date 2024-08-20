@@ -1,6 +1,8 @@
 .resume-page {
   padding: 20px;
-  max-width: 600px;
+  max-width: 80%;
+  min-width: 300px;
+  min-height: 100vh;
   margin: 0 auto;
 }
 

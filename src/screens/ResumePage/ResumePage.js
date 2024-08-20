@@ -66,6 +66,10 @@ const ResumePage = () => {
     setEditMode({ ...editMode, login: false });
   };
 
+  const handleCancelLoginInfo = () => {
+    setEditMode({ ...editMode, login: false });
+  }
+
   const handleSaveEducation = (edu) => {
     if (educations.find((e) => e.id === edu.id)) {
       dispatch(updateEducation(edu));
@@ -74,6 +78,23 @@ const ResumePage = () => {
     }
     setEditMode({ ...editMode, education: null });
   };
+
+  const handleCancelEducation = (id) => {
+    const itemToCancel = educations.find((edu) => edu.id === id);
+
+    if (itemToCancel) {
+      const isEmpty = !itemToCancel.institution.trim() &&
+                      !itemToCancel.degree.trim() &&
+                      !itemToCancel.fieldOfStudy.trim() &&
+                      !itemToCancel.startDate.trim() &&
+                      !itemToCancel.endDate.trim();
+  
+      if (isEmpty) {
+        dispatch(deleteEducation(id));
+      }
+    }
+    setEditMode({ ...editMode, education: null });
+  }
 
   const handleSaveCareer = (career) => {
     if (careers.find((c) => c.id === career.id)) {
@@ -84,6 +105,22 @@ const ResumePage = () => {
     setEditMode({ ...editMode, career: null });
   };
 
+  const handleCancelCareer = (id) => {
+    const itemToCancel = careers.find((career) => career.id === id);
+
+    if (itemToCancel) {      
+      const isEmpty = !itemToCancel.company.trim() &&
+                      !itemToCancel.position.trim() &&
+                      !itemToCancel.startDate.trim() &&
+                      !itemToCancel.endDate.trim() &&
+                      !itemToCancel.description.trim();
+      if (isEmpty) {
+        dispatch(deleteCareer(id));
+      }
+    }
+    setEditMode({ ...editMode, career: null });
+  }
+
   const handleSaveAward = (award) => {
     if (awards.find((a) => a.id === award.id)) {
       dispatch(updateAward(award));
@@ -92,6 +129,21 @@ const ResumePage = () => {
     }
     setEditMode({ ...editMode, award: null });
   };
+
+  const handleCancelAward = (id) => {
+    const itemToCancel = awards.find((award) => award.id === id);
+
+    if (itemToCancel) {
+      const isEmpty = !itemToCancel.title.trim() &&
+                      !itemToCancel.date.trim() &&
+                      !itemToCancel.organization.trim();
+
+      if (isEmpty) {
+        dispatch(deleteAward(id));
+      }
+    }
+    setEditMode({ ...editMode, awrad: null });
+  }
 
   const handleDeleteEducation = (id) => {
     dispatch(deleteEducation(id));
@@ -117,9 +169,20 @@ const ResumePage = () => {
         <SubTitleText 
           content="Login Info" 
           isEditing={editMode.login} 
-          toggleEditMode={() => setEditMode(prev => ({ ...prev, login: !prev.login }))}
+          toggleEditMode={() => setEditMode(
+            prev => ({
+              ...prev, 
+              login: !prev.login 
+            })
+          )}
         />
-        <LoginInfoForm formData={loginFormData} setFormData={setLoginFormData} isEditing={editMode.login} handleSave={handleSaveLoginInfo}/>
+        <LoginInfoForm 
+          formData={loginFormData} 
+          setFormData={setLoginFormData} 
+          isEditing={editMode.login} 
+          handleSave={handleSaveLoginInfo} 
+          handleCancel={handleCancelLoginInfo} 
+        />
 
         <SubTitleText 
           content="Education" 
@@ -132,7 +195,8 @@ const ResumePage = () => {
             formData={edu}
             setFormData={(newEdu) => (editMode.education === edu.id ? handleSaveEducation(newEdu) : null)}
             isEditing={editMode.education === edu.id}
-            handleDelete={() => handleDeleteEducation(edu.id)}
+            handleDelete={()=>handleDeleteEducation(edu.id)}
+            handleCancel={()=>handleCancelEducation(edu.id)}
           />
         ))}
       </div>
@@ -148,7 +212,8 @@ const ResumePage = () => {
             formData={career}
             setFormData={(newCareer) => (editMode.career === career.id ? handleSaveCareer(newCareer) : null)}
             isEditing={editMode.career === career.id}
-            handleDelete={() => handleDeleteCareer(career.id)}
+            handleDelete={()=>handleDeleteCareer(career.id)}
+            handleCancel={()=>handleCancelCareer(career.id)}
           />
         ))}
       </div>
@@ -164,7 +229,8 @@ const ResumePage = () => {
             formData={award}
             setFormData={(newAward) => (editMode.award === award.id ? handleSaveAward(newAward) : null)}
             isEditing={editMode.award === award.id}
-            handleDelete={() => handleDeleteAward(award.id)}
+            handleDelete={()=>handleDeleteAward(award.id)}
+            handleCancel={()=>handleCancelAward(awrad.id)}
           />
         ))}
       </div>

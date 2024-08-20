@@ -1,22 +1,27 @@
-import { ethers, formatEther } from "ethers";
+import { ethers, formatEther } from 'ethers';
 
-export const getbalance = (address, callback) => {
-	window.ethereum
-		.request({
-			method: "eth_getBalance",
-			params: [address, "latest"],
-		})
-		.then((balance) => {
-			callback(formatEther(balance));
-		});
+export const getBalance = async (address, callback) => {
+  try {
+    const balance = await window.ethereum.request({
+      method: 'eth_getBalance',
+      params: [address, 'latest'],
+    });
+    callback(formatEther(balance));
+  } catch (error) {
+    console.error('Error fetching balance:', error);
+  }
 };
 
-export const connectWithWallet = (callback) => {
-	if (window.ethereum) {
-		window.ethereum
-			.request({ method: "eth_requestAccounts" })
-			.then((res) => callback(res[0]));
-	} else {
-		alert("install metamask extension!!");
-	}
+export const connectWithWallet = async (callback) => {
+  if (window.ethereum) {
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      callback(accounts[0]);
+    } catch (error) {
+      console.error('Error connecting with wallet:', error);
+      alert('Please install MetaMask!');
+    }
+  } else {
+    alert('Please install MetaMask!');
+  }
 };
