@@ -65,8 +65,8 @@ export default function Login() {
 	};
 
 	const { linkedInLogin } = useLinkedIn({
-		clientId: process.env.LINKEDIN_CLIENT_ID,
-		redirectUri: process.env.LINKEDIN_CALLBACK_URL, // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
+		clientId: process.env.REACT_APP_LINKEDIN_CLIENT_ID,
+		redirectUri: process.env.REACT_APP_LINKEDIN_CALLBACK_URL, // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
 		// redirectUri: "http://localhost:3000/auth/linkedin/callback", // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
 		onSuccess: (code) => {
 			console.log(code);
