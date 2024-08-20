@@ -79,13 +79,13 @@ export default function Login() {
 	return (
 		<div className="login-page">
 			<GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-			<img
+			{/* <img
 				onClick={linkedInLogin}
 				src={linkedin}
 				alt="Sign in with Linked In"
 				style={{ paddingTop: "20px", maxWidth: "180px", cursor: "pointer" }}
-			/>
-			{/* <LinkedInOAuth /> */}
+			/> */}
+			<LinkedInOAuth />
 			{/* <div
 				className="g_id_signin"
 				data-type="standard"
