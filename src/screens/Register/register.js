@@ -7,20 +7,13 @@ const Register = () => {
 		name: "",
 		email: "",
 		password: "",
+		address: "",
 	};
 	const [userData, setUserData] = useState(userDataInitState);
 	//..web3..............v
-	const [walletConnected, setWalletConnected] = useState({
-		address: "",
-	});
-
 	const accountChangeHandler = (account) => {
-		console.log(account);
-		setWalletConnected({
-			address: account,
-		});
+		setUserData({ ...userData, address: account });
 	};
-
 	//..web3..............^
 	const sendInfo = async (event) => {
 		event.preventDefault();
@@ -35,7 +28,7 @@ const Register = () => {
 	return (
 		<div className="register-screen">
 			<form onSubmit={sendInfo}>
-				<div className="field-container">{walletConnected.address}</div>
+				<div className="field-container">{userData.address}</div>
 				<div className="field-container">
 					<input
 						type="text"
@@ -74,10 +67,10 @@ const Register = () => {
 						type="submit"
 						className="button"
 						onClick={() => connectWithWallet(accountChangeHandler)}
-						disabled={walletConnected.address}
+						disabled={userData.address}
 					>
 						<span className="button-text">
-							{walletConnected.address ? `Connected` : "Connect wallet"}
+							{userData.address ? `Connected` : "Connect wallet"}
 						</span>
 					</button>
 				</div>
@@ -85,7 +78,9 @@ const Register = () => {
 					<button
 						type="submit"
 						className="button"
-						disabled={!userData.password || !userData.email || !walletConnected}
+						disabled={
+							!userData.password || !userData.email || !userData.address
+						}
 						onClick={sendInfo}
 					>
 						<span className="button-text">Register</span>

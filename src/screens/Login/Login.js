@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { supabase } from "@supabase/auth-ui-shared";
+// import LinkedInOAuth from "./linkedInLogin";
+import { useLinkedIn } from "react-linkedin-login-oauth2";
+import linkedin from "react-linkedin-login-oauth2/assets/linkedin.png";
 
+import "./Login.css";
 // import ConnectButton from "Wallets/walletConnect-integration/walletConnect";
 //import { supabase } from '../supabaseClient';
 
@@ -58,8 +62,20 @@ export default function Login() {
 		console.log("the error:", error);
 	};
 
+	const { linkedInLogin } = useLinkedIn({
+		clientId: "779zaqubaebau1",
+		// redirectUri: "https://resullet1.vercel.app/auth/linkedin/callback", // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
+		// redirectUri: "http://localhost:3000/auth/linkedin/callback", // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
+		onSuccess: (code) => {
+			console.log(code);
+		},
+		onError: (error) => {
+			console.log(error);
+		},
+	});
+
 	return (
-		<div>
+		<div className="login-page">
 			{/* <div
 				id="g_id_onload"
 				data-client_id="resullet"
@@ -71,9 +87,14 @@ export default function Login() {
 				data-itp_support="true"
 				data-use_fedcm_for_prompt="true"
 			></div> */}
-			{/* <ConnectButton /> */}
 			<GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-
+			<img
+				onClick={linkedInLogin}
+				src={linkedin}
+				alt="Sign in with Linked In"
+				style={{ paddingTop: "20px", maxWidth: "180px", cursor: "pointer" }}
+			/>
+			{/* <LinkedInOAuth /> */}
 			{/* <div
 				className="g_id_signin"
 				data-type="standard"
@@ -99,7 +120,7 @@ export default function Login() {
 //   const hashBuffer = await crypto.subtle.digest('SHA-256', encodedNonce);
 //   const hashArray = Array.from(new Uint8Array(hashBuffer));
 //   const hashedNonce = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
-  
+
 //   return { nonce, hashedNonce };
 // }
 
@@ -139,24 +160,23 @@ export default function Login() {
 //       <h1>Login</h1>
 
 //       <h1>
-             
+
 //                       Resullet
-             
+
 //              // Security Issues
-             
+
 //              // Project Status
-             
+
 //              // Connect
 //              // Welcome to your new project
 //              // Your project has been deployed on its own instance, with its own API all set up and ready to use.
-             
+
 //              // Get started by building out your database
 //              // Start building your app by creating tables and inserting data. Our Table Editor makes Postgres as easy to use as a spreadsheet, but there's also our SQL Editor if you need something more.
-             
+
 //              // Table Editor
-             
-             
-//              //         </h1> 
+
+//              //         </h1>
 
 //       <div id="g_id_onload"
 //            data-client_id="resullet"
@@ -180,10 +200,8 @@ export default function Login() {
 //   );
 // }
 
-
 // import { supabase } from '@supabase/auth-ui-shared'
 // import React from 'react'
-
 
 // // Adapted from https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest#converting_a_digest_to_a_hex_string
 
@@ -195,7 +213,6 @@ export default function Login() {
 //     const hashedNonce = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
 //   })
 
-
 //   // Use 'hashedNonce' when making the authentication request to Google
 //   //    Use 'nonce' when invoking the supabase.auth.signInWithIdToken() method
 
@@ -204,21 +221,17 @@ export default function Login() {
 //         provider: 'google',
 //         token: response.credential,
 //         nonce: '<NONCE>',
-      
+
 //     })
 // }
 
 // export default function login() {
 
-  
-
-    
-
 //   return (
 //     <div>login
 
 //         <h1>
-             
+
 //         Resullet
 
 // Security Issues
@@ -233,7 +246,6 @@ export default function Login() {
 // Start building your app by creating tables and inserting data. Our Table Editor makes Postgres as easy to use as a spreadsheet, but there's also our SQL Editor if you need something more.
 
 // Table Editor
-
 
 //         </h1>
 
