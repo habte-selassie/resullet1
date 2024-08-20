@@ -39,11 +39,14 @@ function App() {
                 <button onClick={toggleDarkMode}>
                   {isDarkMode ? <img src={darkImage} alt='' width={24}/> : <img src={lightImage} alt='' width={24}/>}
                 </button>
+              <div className="links">
                 <Link to="/" className="home-link">Home</Link>
                 <Link to="/resume" className="resume-link">Resume</Link>
                 {/* <Link to="/appa" className="appa-link">Appa</Link> */}
+                {/* <Link to="/appa" className="appa-link">Appa</Link> */}
                 <Link to="/login" className="login-link">Login</Link>
                 <Link to="/regist" className="login-link">Register</Link>
+              </div>
               </div>
             </nav>
     
@@ -51,7 +54,9 @@ function App() {
               <Route path="/" element={<Home />} />
               {/* <Route path="/appa" element={<About />} /> */}
               <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/regist" element={<Register />} />
+              <Route path="/resume" element={<ResumePage />} />
               <Route path="/resume" element={<ResumePage />} />
             </Routes>
           </div>

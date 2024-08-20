@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { supabase } from "@supabase/auth-ui-shared";
+// import LinkedInOAuth from "./linkedInLogin";
+import { useLinkedIn } from "react-linkedin-login-oauth2";
+import linkedin from "react-linkedin-login-oauth2/assets/linkedin.png";
 
+import "./Login.css";
 // import ConnectButton from "Wallets/walletConnect-integration/walletConnect";
 //import { supabase } from '../supabaseClient';
 
@@ -58,10 +62,37 @@ export default function Login() {
 		console.log("the error:", error);
 	};
 
+	const { linkedInLogin } = useLinkedIn({
+		clientId: "779zaqubaebau1",
+		redirectUri: "https://resullet1.vercel.app/auth/linkedin/callback", // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
+		// redirectUri: "http://localhost:3000/auth/linkedin/callback", // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
+		onSuccess: (code) => {
+			console.log(code);
+		},
+		onError: (error) => {
+			console.log(error);
+		},
+	});
+
 	return (
 		<div className="login-page">
 			<GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-
+			<img
+				onClick={linkedInLogin}
+				src={linkedin}
+				alt="Sign in with Linked In"
+				style={{ paddingTop: "20px", maxWidth: "261px", cursor: "pointer" }}
+			/>
+			{/* <LinkedInOAuth /> */}
+			{/* <div
+				className="g_id_signin"
+				data-type="standard"
+				data-shape="pill"
+				data-theme="filled_blue"
+				data-text="signin_with"
+				data-size="large"
+				data-logo_alignment="left"
+			></div> */}
 		</div>
 	);
 }
