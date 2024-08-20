@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { supabase } from "@supabase/auth-ui-shared";
+import { Navigate } from "react-router-dom";
 // import LinkedInOAuth from "./linkedInLogin";
 import { useLinkedIn } from "react-linkedin-login-oauth2";
 import linkedin from "react-linkedin-login-oauth2/assets/linkedin.png";
@@ -55,16 +56,17 @@ export default function Login() {
 		window.handleSignInWithGoogle = handleSignInWithGoogle; // Expose the function to the global scope
 	}, []);
 
-	const responseMessage = (response) => {
-		console.log(response);
+	const responseMessage = async (response) => {
+		await localStorage.setItem("loginData", response);
+		<Navigate to="/resume" />;
 	};
 	const errorMessage = (error) => {
 		console.log("the error:", error);
 	};
 
 	const { linkedInLogin } = useLinkedIn({
-		clientId: "779zaqubaebau1",
-		redirectUri: "https://resullet1.vercel.app/auth/linkedin/callback", // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
+		clientId: process.env.LINKEDIN_CLIENT_ID,
+		redirectUri: process.env.LINKEDIN_CALLBACK_URL, // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
 		// redirectUri: "http://localhost:3000/auth/linkedin/callback", // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
 		onSuccess: (code) => {
 			console.log(code);
@@ -81,7 +83,7 @@ export default function Login() {
 				onClick={linkedInLogin}
 				src={linkedin}
 				alt="Sign in with Linked In"
-				style={{ paddingTop: "20px", maxWidth: "261px", cursor: "pointer" }}
+				style={{ paddingTop: "20px", maxWidth: "180px", cursor: "pointer" }}
 			/>
 			{/* <LinkedInOAuth /> */}
 			{/* <div
